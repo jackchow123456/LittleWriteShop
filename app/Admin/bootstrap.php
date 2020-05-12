@@ -5,7 +5,9 @@ use Dcat\Admin\Grid;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid\Filter;
 use Dcat\Admin\Show;
-
+use App\Admin\Extensions\Show\DeliveryTracking;
+use App\Admin\Extensions\Show\DeliveryForm;
+use Dcat\Admin\Show\Field;
 /**
  * Dcat-admin - admin builder based on Laravel.
  * @author jqh <https://github.com/jqhph>
@@ -24,3 +26,8 @@ use Dcat\Admin\Show;
  * Admin::js('/packages/prettydocs/js/main.js');
  *
  */
+
+
+
+Field::extend('DeliveryTracking', DeliveryTracking::class);
+Field::extend('DeliveryForm', DeliveryForm::class);

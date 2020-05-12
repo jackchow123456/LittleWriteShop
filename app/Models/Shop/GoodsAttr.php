@@ -3,9 +3,12 @@
 namespace App\Models\Shop;
 
 use Illuminate\Database\Eloquent\Model;
+use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 class GoodsAttr extends Model
 {
+    use HasDateTimeFormatter;
+
     protected $connection = 'shop';
     protected $table = 'goods_attr';
     protected $guarded = [];

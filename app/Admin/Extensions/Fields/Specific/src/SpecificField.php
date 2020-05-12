@@ -8,7 +8,7 @@ class SpecificField extends Field
 {
     protected static $js = [
         'vendors/dcat-admin/vendors/js/forms/select/select2.full.min.js',
-        'vendors/jackchow/layer/layer.js',
+//        'vendors/jackchow/layer/layer.js',
         'vendors/jackchow/jstree/dist/jstree.min.js',
         'vendors/jackchow/test/test.js',
         'vendors/jackchow/viewer/js/viewer.js',

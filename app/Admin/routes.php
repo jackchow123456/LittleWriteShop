@@ -13,19 +13,32 @@ Route::group([
 ], function (Router $router) {
 
     $router->get('/', 'HomeController@index');
+    $router->any('users/files', 'FileController@handle');
 
     // 基础管理
     $router->resource('/auth/users', 'UserController');
-    $router->get('/api/stores', 'UserController@stores');
+    $router->get('api/stores', 'UserController@stores');
+
+    // 公告管理
+    $router->resource('shop/announcement', 'Shop\AnnouncementController');
+
+    // 商品分类管理
+    $router->resource('shop/goodsCategory', 'Shop\GoodsCategoryController');
 
     // 商品管理
     $router->resource('shop/store', 'Shop\StoreController');
     $router->resource('shop/goods', 'Shop\GoodsController');
-    $router->get('/api/getGoodsAttr', 'Shop\GoodsController@getGoodsAttr');
-    $router->post('/api/createGoodsAttr', 'Shop\GoodsController@createGoodsAttr');
+    $router->get('api/getGoodsAttr', 'Shop\GoodsController@getGoodsAttr');
+    $router->post('api/createGoodsAttr', 'Shop\GoodsController@createGoodsAttr');
+    $router->get('api/cat', 'Shop\GoodsController@cats');
+
+    // 订单管理
+    $router->resource('shop/order', 'Shop\OrderController');
+    $router->post('api/order/delivery', 'Shop\OrderController@delivery')->name('订单发货');
 
     // 商品规格
     $router->resource('shop/goodsAttr', 'Shop\GoodsAttrController');
+
     // 文件管理
     $router->get('fileManager', 'FileManagerController@index')->name('fileManager.index')->middleware('permission:fileManager');
     $router->get('fileManager/image', 'FileManagerController@image')->name('fileManager.image');

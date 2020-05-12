@@ -76,7 +76,7 @@ class GoodsRepository
         $skus = $sku['sku'];
         if (!$skus) return;
 
-        Log::debug('skus',[$skus]);
+        Log::debug('skus', [$skus]);
 
         foreach ($skus as $sk => $item) {
             $key = $keyName = [];
@@ -137,7 +137,7 @@ class GoodsRepository
                 'store_id' => getStoreId(),
                 'mc_id' => $mediaCategory->getKey(),
                 'type' => 'image',
-                'path' => getSavePath($path),
+                'path' => $path,
             ]);
         }
     }

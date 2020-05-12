@@ -3,6 +3,8 @@
 namespace App\Admin\Controllers\Shop;
 
 use App\Models\Shop\GoodsAttr;
+use App\Models\Shop\GoodsCategory;
+use App\Models\Shop\Store;
 use Dcat\Admin\Admin;
 use Dcat\Admin\Controllers\AdminController;
 use Dcat\Admin\Form;
@@ -32,7 +34,12 @@ class GoodsController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('商品名称'));
-        $grid->column('description', __('商品描述'));
+        $grid->store_id('所属店铺')->display(function ($storeId) {
+            return Store::query()->findOrFail($storeId)->name;
+        });
+        $grid->column('cat_id', __('商品分类'))->display(function ($catId) {
+            return GoodsCategory::query()->findOrFail($catId)->title;
+        });
         $grid->column('price', __('价格'));
         $grid->column('line_price', __('划线价'));
         $grid->column('stock_num', __('库存'));
@@ -55,6 +62,9 @@ class GoodsController extends AdminController
             $form->text('name', __('商品名称'))->required();
             $form->hidden('user_id', __('操作人'))->readonly()->value(Admin::user()->getKey());
             $form->hidden('store_id', __('店铺id'))->readonly()->value(getStoreId());
+            $form->select('cat_id', '关联分类')
+                ->required()
+                ->options(GoodsCategory::selectOptions());
             $form->textarea('short_description', __('分享描述'))->rows(3)->required();
             $form->image('image', __('商品图'));
             $form->dateRange('start_date', 'end_date', __('上架时间'));
@@ -120,4 +130,12 @@ class GoodsController extends AdminController
         return successMsg($result);
     }
 
+
+    // 店铺列表
+    public function cats(Request $request)
+    {
+        $q = $request->get('q');
+
+        return GoodsCategory::query()->where('title', 'like', "%$q%")->paginate(null, ['id', 'title as text']);
+    }
 }

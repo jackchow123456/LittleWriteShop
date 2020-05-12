@@ -4,6 +4,7 @@ namespace App\Admin\Controllers\Shop;
 
 use App\Admin\Repositories\Shop\GoodsAttrValue;
 use App\Models\Shop\GoodsAttr;
+use App\Models\Shop\Store;
 use Dcat\Admin\Controllers\AdminController;
 use Dcat\Admin\Form;
 use Dcat\Admin\Grid;
@@ -33,6 +34,9 @@ class GoodsAttrController extends AdminController
 
         $grid->column('id', __('Id'));
         $grid->column('name', __('规格名称'));
+        $grid->store_id('所属店铺')->display(function($storeId) {
+            return Store::find($storeId)->name;
+        });
         $grid->column('sort', __('排序'));
         $grid->column('created_at', __('创建时间'));
         $grid->column('updated_at', __('修改时间'));

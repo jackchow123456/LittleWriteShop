@@ -5,15 +5,19 @@ namespace App\Models\Shop;
 use App\Admin\Repositories\Shop\GoodsRepository;
 use Dcat\Admin\Admin;
 use Illuminate\Database\Eloquent\Model;
+use Dcat\Admin\Traits\HasDateTimeFormatter;
 
 class Goods extends Model
 {
-    protected $connection= 'shop';
+    use HasDateTimeFormatter;
+
+    protected $connection = 'shop';
     protected $guarded = [];
 
     protected $appends = [
         'sku', 'me', 'image_uri'
     ];
+
 
     public function __construct(array $attributes = [], $is_appends = true)
     {
@@ -79,7 +83,7 @@ class Goods extends Model
      */
     public function setImageAttribute($key)
     {
-        $key ? $this->attributes['image'] = getSavePath($key) : $this->attributes['image'] = '';
+        $key ? $this->attributes['image'] = $key : $this->attributes['image'] = '';
     }
 
     /**
