@@ -68,10 +68,12 @@ class GoodsController extends AdminController
             $form->textarea('short_description', __('分享描述'))->rows(3)->required();
             $form->image('image', __('商品图'));
             $form->dateRange('start_date', 'end_date', __('上架时间'));
-            $form->currency('line_price', '划线价')->symbol('￥');
-            $form->currency('cost_price', '成本价')->symbol('￥');
-            $form->currency('price', '售价')->symbol('￥');
-            $form->number('stock_num', '库存');
+
+            $form->currency('line_price', '划线价')->symbol('￥')->width(3)->required();
+            $form->currency('cost_price', '成本价')->symbol('￥')->width(3)->required();
+            $form->currency('price', '售价')->symbol('￥')->width(3)->required();
+
+            $form->number('stock_num', '库存')->width(4)->required();
             $form->editor('content', __('内容'));
 
         })->tab('商品画册', function ($form) {

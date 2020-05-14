@@ -22,6 +22,9 @@ Route::group([
     // 公告管理
     $router->resource('shop/announcement', 'Shop\AnnouncementController');
 
+    // 广告（banner）管理
+    $router->resource('shop/ad', 'Shop\AdController');
+
     // 商品分类管理
     $router->resource('shop/goodsCategory', 'Shop\GoodsCategoryController');
 
@@ -35,6 +38,13 @@ Route::group([
     // 订单管理
     $router->resource('shop/order', 'Shop\OrderController');
     $router->post('api/order/delivery', 'Shop\OrderController@delivery')->name('订单发货');
+
+    // 优惠券管理
+    $router->resource('shop/coupon', 'Shop\CouponController');
+    $router->get('api/goods', 'Shop\CouponController@goods');
+    $router->get('api/goodsByIds', 'Shop\CouponController@goodsByIds');
+    $router->get('api/goodsCat', 'Shop\CouponController@goodsCat');
+    $router->get('api/goodsCatByIds', 'Shop\CouponController@goodsCatByIds');
 
     // 商品规格
     $router->resource('shop/goodsAttr', 'Shop\GoodsAttrController');

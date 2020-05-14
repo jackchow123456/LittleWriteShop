@@ -6,6 +6,7 @@ use App\Admin\Repositories\Shop\GoodsRepository;
 use Dcat\Admin\Admin;
 use Illuminate\Database\Eloquent\Model;
 use Dcat\Admin\Traits\HasDateTimeFormatter;
+use Illuminate\Support\Facades\Storage;
 
 class Goods extends Model
 {
@@ -15,7 +16,7 @@ class Goods extends Model
     protected $guarded = [];
 
     protected $appends = [
-        'sku', 'me', 'image_uri'
+        'sku', 'me'
     ];
 
 
@@ -30,9 +31,9 @@ class Goods extends Model
      *
      * @return \Illuminate\Contracts\Routing\UrlGenerator|string
      */
-    public function getImageUriAttribute()
+    public function getImageAttribute()
     {
-        return $this->attributes['image'] ? url($this->attributes['image']) : '';
+        return $this->attributes['image'] ? Storage::disk('admin')->url($this->attributes['image']) : '';
     }
 
     /**
