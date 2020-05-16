@@ -70,13 +70,7 @@ class CouponController extends AdminController
             $form->number('stock', '库存')->required()->width(4);
             $form->switch('status', __('状态'))->default(1);
 
-
             (new GoodsSelector())->render($select2->getElementClassSelector(), $form->model());
-
-//            $form->wrap(function (){
-//                return view('admin.test');
-//            });
-
         });
 
     }

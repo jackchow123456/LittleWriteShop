@@ -46,6 +46,9 @@ Route::group([
     $router->get('api/goodsCat', 'Shop\CouponController@goodsCat');
     $router->get('api/goodsCatByIds', 'Shop\CouponController@goodsCatByIds');
 
+    // 转盘活动
+    $router->resource('shop/luckyDraw', 'Shop\LuckyDrawController');
+
     // 商品规格
     $router->resource('shop/goodsAttr', 'Shop\GoodsAttrController');
 

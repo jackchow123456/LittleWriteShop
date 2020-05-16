@@ -251,6 +251,8 @@ JS;
                    }
                    
                    basic(url,column,callback);
+              }else{
+                   clearResult();
               }
             });
 JS;
